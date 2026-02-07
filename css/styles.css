@@ -1,0 +1,281 @@
+:root {
+  --bg1: linear-gradient(135deg, #ffb3c1 0%, #ff6b8f 50%, #ffcdd6 100%);
+  --text: #1b1b1f;
+  --muted: #5a5a66;
+  --card: #ffffffcc;
+  --btn-bg: #ffffff;
+  --btn-text: #ea3e67;
+  --btn-shadow: 0 10px 25px rgba(234, 62, 103, 0.18);
+  --btn-hover: #ffe6ec;
+  --accent: #ea3e67;
+  --hint: #7a7a86;
+}
+
+/* Reset & base */
+* { box-sizing: border-box; }
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+               "Segoe UI Emoji", "Segoe UI Symbol";
+  color: var(--text);
+  background: var(--bg1);
+  transition: background 1.4s ease;
+
+  /* ✅ allow vertical scroll; prevent horizontal overflow */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Subtle hearts background */
+.hearts-layer {
+  position: fixed; inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ✅ Each screen is now scrollable area, not fixed */
+.screen {
+  position: relative;
+  min-height: 100dvh; /* dynamic viewport height for mobile browser UI */
+  /* safe area for iOS + your design padding */
+  padding: 0 clamp(16px, 2vw, 32px) clamp(16px, 2vw, 32px);
+  padding-top: calc(env(safe-area-inset-top, 0px) + clamp(16px, 2vw, 32px));
+  display: grid; place-items: center;
+  z-index: 1;
+}
+
+.card {
+  width: min(900px, 92vw);
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 24px;
+  padding: clamp(22px, 3.5vw, 40px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  opacity: 1;
+  transition: opacity .45s ease, transform .45s ease;
+}
+.hidden { display: none !important; }
+
+h1 {
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-size: clamp(28px, 5vw, 44px);
+  margin: 0 0 18px;
+  color: #1a1215;
+}
+
+p.lead {
+  text-align: center;
+  color: var(--muted);
+  font-size: clamp(14px, 2.6vw, 18px);
+  margin: 0 0 26px;
+}
+
+/* Buttons row */
+.actions {
+  position: relative;
+  margin: 28px auto 12px;
+
+  /* ✅ allow wrapping on small screens */
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
+
+  gap: 14px;
+  min-height: 70px; /* room for moving NO initially */
+}
+
+.btn {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  border: 1px solid rgba(234, 62, 103, 0.22);
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+  box-shadow: var(--btn-shadow);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:hover { transform: translateY(-2px); background: var(--btn-hover); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+  background: #ea3e67; color: #fff; border: none;
+  box-shadow: 0 12px 30px rgba(234, 62, 103, 0.35);
+}
+.btn-primary:hover { background: #ee5a7d; }
+.btn-primary:active { background: #e43a63; }
+
+/* ✅ NO button wrapper follows viewport (not the row) */
+.no-wrap {
+  position: fixed; /* changed from absolute */
+  z-index: 2;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  transition: top .38s ease, left .38s ease, transform .38s ease;
+  will-change: top, left, transform;
+}
+
+.hint {
+  margin-top: 10px;
+  text-align: center;
+  color: var(--hint);
+  font-size: clamp(12px, 2.3vw, 16px);
+}
+
+/* Agreement list */
+.agreements {
+  margin: 16px 0 24px;
+  display: grid; gap: 10px;
+  font-size: clamp(14px, 2.6vw, 18px);
+  color: #2a1d21;
+  list-style: "❤️  ";
+  padding-left: 1.2em;
+}
+.agreements li { margin-left: .2em; }
+
+/* Final screen */
+.final h2 {
+  text-align: center;
+  font-size: clamp(26px, 4.6vw, 38px);
+  margin: 0 0 12px;
+}
+.final p.note {
+  text-align: center;
+  margin: 12px 0 10px;
+  color: var(--muted);
+}
+
+.gif-wrap {
+  display: grid; place-items: center;
+  margin: 16px auto 10px;
+}
+.gif-wrap img {
+  width: min(360px, 70vw);
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
+
+/* ✅ Tenor embed same look as image */
+.gif-wrap .tenor-gif-embed, .gif-wrap iframe {
+  width: min(420px, 92vw);
+  max-width: 92vw;
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
+
+/* Top bar */
+.top-bar {
+  position: fixed; top: 12px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  font-weight: 600; color: #4a3a3f;
+}
+.countdown { font-variant-numeric: tabular-nums; font-size: 14px; }
+.mute {
+  margin-left: 6px;
+  background: #fff; color: var(--accent);
+  border: 1px solid rgba(234, 62, 103, 0.22);
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer; font-weight: 700;
+  box-shadow: var(--btn-shadow);
+}
+
+/* Gallery */
+.gallery { margin-top: 22px; }
+.gallery h3 {
+  font-size: clamp(18px, 3.8vw, 24px);
+  margin: 0 0 10px; text-align: center;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+@media (min-width: 700px) {
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+}
+@media (min-width: 1000px) {
+  .grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+}
+/* ✅ Small phones: 1 column + buttons can become full-width */
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; gap: 10px; }
+  .btn { width: 100%; max-width: 260px; }
+}
+
+.grid figure {
+  margin: 0;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.65);
+  background: #fff;
+  display: grid; place-items: center;
+  position: relative;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+.grid img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .35s ease;
+}
+.grid figure:hover img { transform: scale(1.04); }
+.grid figcaption {
+  position: absolute; bottom: 6px; left: 8px; right: 8px;
+  font-size: 12px; color: #fff;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.35));
+  padding: 26px 6px 6px; border-radius: 10px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* Hearts animation */
+.heart {
+  position: absolute;
+  font-size: 16px;
+  opacity: 0.5;
+  animation: float linear infinite;
+  filter: drop-shadow(0 6px 14px rgba(234,62,103,0.18));
+  will-change: transform, opacity;
+}
+@keyframes float {
+  0% { transform: translateY(110vh) translateX(0) scale(var(--scale, 1)); opacity: 0; }
+  10% { opacity: .55; }
+  50% { transform: translateY(40vh) translateX(var(--drift, 20px)) scale(var(--scale, 1)); }
+  100% { transform: translateY(-15vh) translateX(calc(var(--drift, 20px) * -0.8)) scale(var(--scale, 1)); opacity: 0; }
+}
+
+/* Confetti canvas */
+#confetti {
+  position: fixed; inset: 0;
+  z-index: 4; pointer-events: none;
+  opacity: 0; transition: opacity .25s ease;
+}
+#confetti.active { opacity: 1; }

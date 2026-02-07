@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Private Entrance — Valentine</title>
+  <meta name="theme-color" content="#ff6b8f" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%8C%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .login-card { text-align: center; }
+    .login-card h1 { margin-bottom: 12px; }
+    .login-card p { color: var(--muted); }
+    .login-actions { display: grid; gap: 10px; margin-top: 16px; }
+    .input { padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(234,62,103,.25); }
+    .tiny { font-size: 12px; color: var(--hint); }
+  </style>
+</head>
+<body>
+  <div class="hearts-layer" aria-hidden="true" id="heartsLayer"></div>
+  <section class="screen" aria-labelledby="loginHeading">
+    <div class="card login-card">
+      <h1 id="loginHeading">Private Entrance 💌</h1>
+      <p>Only a special someone may enter.</p>
+
+      <!-- Passcode mode UI -->
+      <div id="passcodeBox">
+        <div class="login-actions">
+          <input id="passcode" class="input" type="password" placeholder="Enter passcode" autocomplete="current-password" />
+          <button id="passcodeLogin" class="btn btn-primary" type="button">Unlock</button>
+          <div class="tiny">Tip: You can change the passcode hash in <code>js/auth.js</code>.</div>
+        </div>
+      </div>
+
+      <!-- Netlify Identity UI -->
+      <div id="netlifyBox" class="hidden">
+        <div class="login-actions">
+          <button id="netlifyLogin" class="btn btn-primary" type="button">Sign in with Email</button>
+          <div class="tiny">Netlify Identity is invite‑only. Add the allowed email in <code>js/auth.js</code> and invite them in Netlify dashboard.</div>
+        </div>
+      </div>
+
+      <div class="hint" style="margin-top:16px;">Your data is safe — we only store a short‑lived session in your browser.</div>
+    </div>
+  </section>
+
+  <script defer src="js/hearts.js"></script>
+  <script defer src="js/auth.js"></script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    window.VPAuth && window.VPAuth.initLoginUI();
+  });
+</script>
+
+</body>
+</html>

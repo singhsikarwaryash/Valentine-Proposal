@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Will you be my Valentine?</title>
+  <meta name="theme-color" content="#ff6b8f" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%96%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Enforce auth on page load -->
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      window.VPAuth && window.VPAuth.gateOrProceed();
+    });
+  </script>
+
+  <!-- Floating hearts background -->
+  <div class="hearts-layer" aria-hidden="true" id="heartsLayer"></div>
+
+  <!-- Background music (replace with your track at assets/music.mp3) -->
+  <audio id="bgm" src="assets/music.mp3" loop preload="auto"></audio>
+
+  <!-- Countdown + Mute -->
+  <div class="top-bar" role="group" aria-label="Valentine Controls">
+    <div class="countdown" id="countdown" aria-live="polite">Loading…</div>
+    <button class="mute" id="muteToggle" aria-pressed="false" aria-label="Toggle sound">🔈 Sound On</button>
+  </div>
+
+  <!-- Initial Screen -->
+  <section class="screen" id="initialScreen" aria-labelledby="mainHeading">
+    <div class="card active" id="initialCard">
+      <h1 id="mainHeading">Will you be my Valentine?</h1>
+
+      <div class="actions" id="actionArea">
+        <button id="yesBtn" class="btn btn-primary" type="button" aria-label="Yes, accept">
+          YES
+        </button>
+
+        <!-- NO button inside movable wrapper -->
+        <div class="no-wrap" id="noWrap">
+          <button id="noBtn" class="btn" type="button" aria-label="No, decline">
+            NO <span id="noEmoji" aria-hidden="true">💔</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hint">Hint: The ‘No’ button is a bit shy… 😏</div>
+      <p class="lead">
+        Days until Valentine’s Day are counting down above — don’t keep me waiting. 💖
+      </p>
+    </div>
+  </section>
+
+  <!-- Agreement Screen -->
+  <section class="screen hidden" id="agreementScreen" aria-labelledby="agreeHeading">
+    <div class="card active" id="agreementCard">
+      <h1 id="agreeHeading" style="margin-bottom: 10px;">By clicking YES you agree to:</h1>
+      <ul class="agreements">
+        <li>Unlimited cuddles, surprise hugs &amp; soft kisses</li>
+        <li>Random chocolates, stolen hoodies &amp; shared desserts</li>
+        <li>Listening, understanding &amp; never invalidating your feelings</li>
+        <li>Growing together — dreams, struggles &amp; everything in between</li>
+        <li>Being deeply loved by someone who’s serious about you</li>
+      </ul>
+      <p class="lead">Effective immediately!</p>
+
+      <div class="actions" style="margin-top: 18px;">
+        <button id="agreeYesBtn" class="btn btn-primary" type="button" aria-label="Agree and continue">
+          YES
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Celebration Screen -->
+  <section class="screen hidden" id="finalScreen" aria-labelledby="finalHeading">
+    <div class="card active final" id="finalCard">
+      <h2 id="finalHeading" tabindex="-1">Yay! 🎉<br/>Good Choice!</h2>
+      <div class="gif-wrap">
+  <div class="tenor-gif-embed"
+       data-postid="11397231996208728070"
+       data-share-method="host"
+       data-aspect-ratio="1.09211"
+       data-width="100%">
+    <a href="https://tenor.com/view/besito-catlove-gif-11397231996208728070">Besito Catlove GIF</a>
+    from <a href="https://tenor.com/search/besito-gifs">Besito GIFs</a>
+  </div>
+</div>
+      <p class="lead" style="margin-bottom: 18px;">That’s the best decision you have ever made! ❤️</p>
+
+      <!-- Photo Gallery -->
+      <div class="gallery" aria-labelledby="galleryHeading">
+        <h3 id="galleryHeading">Our Moments</h3>
+        <div class="grid" id="galleryGrid">
+          <figure>
+            <img src="assets/photos/photo1.jpg" alt="First coffee date" loading="lazy" />
+            <figcaption>First coffee date ☕</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/photos/photo2.jpg" alt="Sunset walk" loading="lazy" />
+            <figcaption>Sunset walk 🌅</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/photos/photo3.jpg" alt="Goofy selfie" loading="lazy" />
+            <figcaption>Goofy selfie 🤪</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/photos/photo4.jpg" alt="Rainy-day cuddles" loading="lazy" />
+            <figcaption>Rainy-day cuddles 🌧️</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confetti canvas -->
+  <canvas id="confetti" width="0" height="0" aria-hidden="true"></canvas>
+
+ 
+<script defer src="https://tenor.com/embed.js"></script>
+<script defer src="js/hearts.js"></script>
+<script defer src="js/countdown.js"></script>
+<script defer src="js/confetti.js"></script>
+<script defer src="js/auth.js"></script>
+<script defer src="js/main.js"></script>
+
+</body>
+</html>
